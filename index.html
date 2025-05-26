@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-A">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools for Job Seekers - Interactive Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .intro-section, .question-section, .tools-display-section, .outro-section {
+            padding: 40px 20px;
+            margin-top: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .question-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #555;
+            font-size: 1.8em;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .category-btn {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .category-btn:hover {
+            background-color: #5a6fcf;
+            transform: translateY(-2px);
+        }
+        
+        .category-btn:active {
+            transform: translateY(0px);
+        }
+
+        .tools-display-section {
+            display: none; /* Hidden by default */
+        }
+
+        .tools-display-section h3 {
+            color: #764ba2;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+
+        .tool-card {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            opacity: 0; /* For animation */
+            transform: translateY(20px); /* For animation */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        
+        .tool-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tool-card h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .tool-card p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        .tool-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .tool-card a:hover {
+            text-decoration: underline;
+        }
+
+        .outro-section {
+            text-align: center;
+        }
+        .outro-section p {
+            font-size: 1.1em;
+        }
+
+        /* Animation helper */
+        .hidden {
+            display: none;
+        }
+
+        /* Simple scroll reveal for sections */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="animate__animated animate__fadeInDown">
+        <h1>AI for Your Job Hunt</h1>
+        <p>Navigate the future of job searching with smart AI tools. Less text, more action!</p>
+    </header>
+
+    <div class="container">
+
+        <section class="intro-section scroll-animate">
+            <h2>Tired of Text Walls?</h2>
+            <p>The job market is evolving, and AI can be your secret weapon! Instead of sifting through endless articles, let's find the right AI tools for <em>your</em> specific needs. This guide makes it interactive and actionable.</p>
+        </section>
+
+        <section class="question-section scroll-animate">
+            <h2>What part of your job search needs an AI boost?</h2>
+            <div class="category-buttons">
+                <button class="category-btn" data-category="resume">Resume & CV Optimization</button>
+                <button class="category-btn" data-category="coverLetter">Cover Letter Crafting</button>
+                <button class="category-btn" data-category="interview">Interview Preparation</button>
+                <button class="category-btn" data-category="jobDiscovery">Job Discovery & Application</button>
+            </div>
+        </section>
+
+        <section id="toolsDisplay" class="tools-display-section">
+            <h3 id="toolsCategoryTitle"></h3>
+            <div id="toolsList">
+                <!-- Tool cards will be injected here by JavaScript -->
+            </div>
+        </section>
+        
+        <section class="outro-section scroll-animate">
+            <h2>Ready to Get Started?</h2>
+            <p>AI tools can significantly enhance your job search, but remember they are assistants. Your unique skills, experiences, and personal touch remain crucial. Use these tools wisely to save time, improve quality, and gain an edge!</p>
+        </section>
+
+    </div>
+    
+    <footer>
+        <p>© 2024 Interactive Explainer Demo. Content for demonstration purposes.</p>
+    </footer>
+
+    <script>
+        const aiToolsData = {
+            resume: {
+                title: "AI for Resume & CV Optimization",
+                tools: [
+                    { name: "Teal", description: "AI-powered resume builder and job tracker. Helps tailor your resume to specific job descriptions and track your applications.", link: "https://www.tealhq.com/" },
+                    { name: "Kickresume", description: "Uses AI to help write resume sections, suggest impactful bullet points, and offers a variety of professional templates.", link: "https://www.kickresume.com/" },
+                    { name: "Rezi", description: "Focuses on creating ATS-friendly resumes with AI feedback on content, formatting, and keyword optimization for better chances.", link: "https://www.rezi.ai/" }
+                ]
+            },
+            coverLetter: {
+                title: "AI for Cover Letter Crafting",
+                tools: [
+                    { name: "ChatGPT / Claude", description: "General AI assistants. Provide your resume and job description to draft a cover letter. *Requires careful editing and personalization for authenticity.*", link: "https://chat.openai.com/" },
+                    { name: "Jasper.ai (or similar)", description: "AI writing assistant with various templates that can help generate persuasive and structured cover letter content.", link: "https://www.jasper.ai/" },
+                    { name: "Copy.ai", description: "Another AI writing tool that can assist in drafting compelling marketing copy, adaptable for cover letters.", link: "https://www.copy.ai/" }
+                ]
+            },
+            interview: {
+                title: "AI for Interview Preparation",
+                tools: [
+                    { name: "Interview.ai / VMock", description: "Offers AI-powered mock interviews with feedback on your answers, speaking pace, and even non-verbal cues via webcam analysis.", link: "https://interview.ai/" }, // Note: VMock is also popular
+                    { name: "Yoodli", description: "AI speech coach. Practice your interview answers and get instant feedback on filler words, pacing, word choice, and clarity.", link: "https://yoodli.ai/" },
+                    { name: "Poised", description: "Real-time communication coach that provides feedback during virtual meetings (can be used for practice interviews).", link: "https://www.poised.com/"}
+                ]
+            },
+            jobDiscovery: {
+                title: "AI for Job Discovery & Application",
+                tools: [
+                    { name: "LinkedIn Premium", description: "Leverages AI for enhanced job recommendations, insights on applicants for a role, and suggesting skills to highlight.", link: "https://www.linkedin.com/premium/" },
+                    { name: "Simplify (Copilot)", description: "Browser extension that uses AI to autofill job applications across various platforms and track them efficiently.", link: "https://simplify.jobs/" },
+                    { name: "Otta", description: "Curates job listings, particularly in tech, using AI to match you with relevant roles based on your detailed preferences.", link: "https://otta.com/" }
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const toolsDisplaySection = document.getElementById('toolsDisplay');
+            const toolsCategoryTitle = document.getElementById('toolsCategoryTitle');
+            const toolsListDiv = document.getElementById('toolsList');
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+                    const categoryData = aiToolsData[category];
+
+                    toolsCategoryTitle.textContent = categoryData.title;
+                    toolsListDiv.innerHTML = ''; // Clear previous tools
+
+                    // Animate out old cards if any (simple fade out here for brevity)
+                    // A more robust solution would track old cards and animate them specifically
+                    Array.from(toolsListDiv.children).forEach(child => child.classList.remove('visible'));
+
+
+                    categoryData.tools.forEach((tool, index) => {
+                        const card = document.createElement('div');
+                        card.classList.add('tool-card');
+                        // Add animation class from Animate.css
+                        // card.classList.add('animate__animated', 'animate__fadeInUp');
+                        // card.style.animationDelay = `${index * 0.1}s`; // Stagger animation
+
+                        card.innerHTML = `
+                            <h4>${tool.name}</h4>
+                            <p>${tool.description}</p>
+                            ${tool.link ? `<a href="${tool.link}" target="_blank" rel="noopener noreferrer">Visit ${tool.name} →</a>` : ''}
+                        `;
+                        toolsListDiv.appendChild(card);
+                        // Trigger reflow to ensure transition takes effect
+                        void card.offsetWidth; 
+                        card.classList.add('visible'); // Add visible for CSS transition
+                    });
+
+                    toolsDisplaySection.style.display = 'block';
+                    // Add entrance animation to the section itself
+                    toolsDisplaySection.classList.remove('animate__fadeInUp', 'animate__animated'); // reset
+                    void toolsDisplaySection.offsetWidth; // Trigger reflow
+                    toolsDisplaySection.classList.add('animate__animated', 'animate__fadeInUp');
+                    
+                    // Scroll to the tools section
+                    toolsDisplaySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            // Simple scroll animation for sections
+            const scrollSections = document.querySelectorAll('.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Optional: unobserve after animation
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+            scrollSections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
